@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">MagicDex</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="content_description">Image</string>
     <string name="hello_blank_fragment2">Hello blank fragment 2</string>
+    <string name="main_title">Which card\nare you looking for?</string>
+    <string name="main_search">Search for card by name</string>
+    <string name="mtg_news">Magic: The Gathering News</string>
+    <string name="view_all">View All</string>
+    <string name="news_title">THEROS BEYOND DEATH PLANESWALKER DECKS</string>
+    <string name="news_date">January 8, 2020</string>
+    <string name="menu_item_1">MagicDex</string>
+    <string name="menu_item_2">Sets</string>
+    <string name="menu_item_3">Colors</string>
+    <string name="menu_item_4">Types</string>
+    <string name="menu_item_5">Items</string>
+    <string name="menu_item_6">Abilities</string>
 </resources>
