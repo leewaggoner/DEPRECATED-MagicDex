@@ -40,13 +40,16 @@ class MagicRssRepository {
     }
 
     private fun processNewsList(rssFeed: RssFeed?) : MutableList<News> {
-        val newsList = mutableListOf<News>()
+        var newsList = mutableListOf<News>()
         val rssItems = rssFeed?.channel?.item
         val baseLinkUrl = rssFeed?.channel?.link
         rssItems?.let {
             for(rssNews in it) {
                 val news = News(rssNews.title, baseLinkUrl + rssNews.link, rssNews.pubDateString, getImageUrl(rssNews.description))
                 newsList.add(news)
+            }
+            if (newsList.size > 20) {
+                newsList = newsList.subList(0, 20)
             }
         }
         return newsList
