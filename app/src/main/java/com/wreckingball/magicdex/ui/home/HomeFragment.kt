@@ -7,42 +7,35 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wreckingball.magicdex.R
 import com.wreckingball.magicdex.adapters.MenuAdapter
 import com.wreckingball.magicdex.adapters.NewsAdapter
 import com.wreckingball.magicdex.models.Menu
-import com.wreckingball.magicdex.models.News
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
-    private lateinit var homeViewModel: HomeViewModel
+class HomeFragment : Fragment(R.layout.fragment_home) {
+    private val model : HomeViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-
-        val recyclerViewMenu = root.recyclerViewMenu
-
-        recyclerViewMenu.layoutManager = GridLayoutManager(context, 2)
-        homeViewModel.getListMenu(context!!).observe(this, Observer {
-            val items: List<Menu> = it
-            recyclerViewMenu.adapter = MenuAdapter(items, root.context)
-        })
-
-        return root
+        return super.onCreateView(layoutInflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         progressBar.visibility = View.VISIBLE
 
         val recyclerViewNews = view.recyclerViewNews
+        val recyclerViewMenu = view.recyclerViewMenu
+
+        recyclerViewMenu.layoutManager = GridLayoutManager(context, 2)
+        model.getListMenu(context!!).observe(this, Observer {
+            val items: List<Menu> = it
+            recyclerViewMenu.adapter = MenuAdapter(items, view.context)
+        })
 
         recyclerViewNews.layoutManager = GridLayoutManager(context, 1)
         recyclerViewNews.addItemDecoration(
@@ -52,7 +45,7 @@ class HomeFragment : Fragment() {
             )
         )
 
-        homeViewModel.getListNews().observe(this, Observer {
+        model.getListNews().observe(this, Observer {
             progressBar.visibility = View.INVISIBLE
             recyclerViewNews.adapter = NewsAdapter(it, view.context)
         })

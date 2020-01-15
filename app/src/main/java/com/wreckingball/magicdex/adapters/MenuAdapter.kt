@@ -17,12 +17,13 @@ import kotlinx.android.synthetic.main.item_menu.view.*
 class MenuAdapter(
     private val list: List<Menu>,
     private val context: Context) : RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: Menu) {
             itemView.textViewName.text = item.name
 
             val color = ColorUtil(itemView.context).covertColor(item.color)
-            itemView.relativeLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP )
+            itemView.relativeLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
             itemView.setOnClickListener {
                 val action = HomeFragmentDirections.actionHomeFragmentToMagicDexFragment()

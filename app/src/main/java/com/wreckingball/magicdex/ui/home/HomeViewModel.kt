@@ -1,15 +1,18 @@
 package com.wreckingball.magicdex.ui.home
 
+import android.app.Application
 import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.wreckingball.magicdex.R
 import com.wreckingball.magicdex.models.Menu
 import com.wreckingball.magicdex.models.News
 import com.wreckingball.magicdex.repository.MagicRssRepository
+import org.koin.core.KoinComponent
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(val newsRepository: MagicRssRepository, application: Application) :
+    AndroidViewModel(application), KoinComponent {
     private var listMenu = MutableLiveData<List<Menu>>()
     private var listNews = MutableLiveData<List<News>>()
 
@@ -24,7 +27,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getListNews(): LiveData<List<News>> {
-        listNews = MagicRssRepository().getRssFeed()
+        listNews = newsRepository.getRssFeed()
         return listNews
     }
 }

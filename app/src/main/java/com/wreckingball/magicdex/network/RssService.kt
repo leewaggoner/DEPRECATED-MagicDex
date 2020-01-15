@@ -1,4 +1,4 @@
-package com.wreckingball.magicdex.repository
+package com.wreckingball.magicdex.network
 
 import com.wreckingball.magicdex.models.RssFeed
 import retrofit2.Call

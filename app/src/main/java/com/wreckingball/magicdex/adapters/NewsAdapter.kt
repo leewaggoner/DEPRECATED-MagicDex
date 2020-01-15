@@ -17,14 +17,19 @@ class NewsAdapter(
     private val list: List<News>,
     private val context: Context
 ) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: News) {
             itemView.newsTitle.text = item.title
             itemView.newsDate.text = item.date
             val picasso = Picasso.get()
-            picasso.load(item.imageUrl)
-                .placeholder(R.drawable.news1)
-                .into(itemView.newsImage)
+            if (item.imageUrl == null || item.imageUrl.isEmpty()) {
+                itemView.newsImage.setImageResource(R.drawable.news1)
+            } else {
+                picasso.load(item.imageUrl)
+                    .placeholder(R.drawable.news1)
+                    .into(itemView.newsImage)
+            }
             itemView.setOnClickListener {
                 val uriUrl: Uri = Uri.parse(item.link)
                 val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
