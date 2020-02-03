@@ -4,19 +4,24 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.wreckingball.magicdex.database.NewsDao
 import com.wreckingball.magicdex.models.News
+import com.wreckingball.magicdex.models.NewsList
 import com.wreckingball.magicdex.models.RssFeed
+import com.wreckingball.magicdex.network.ERROR
 import com.wreckingball.magicdex.network.RssService
+import com.wreckingball.magicdex.network.SUCCESS
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
 
-private val TAG = "MagicRssRepository"
+const val MAX_NEWS_ITEMS = 20
+
+private const val TAG = "MagicRssRepository"
 class MagicRssRepository(private val newsDao: NewsDao, private val rssService: RssService) {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    lateinit var newsList: MutableLiveData<NewsList>
 
-    fun getRssFeed() : MutableLiveData<List<News>> {
-        val newsList = MutableLiveData<List<News>>()
+    fun getRssFeed() : MutableLiveData<NewsList> {
         Log.d(TAG, "Network call https://magic.wizards.com/en/rss/rss.xml")
         val call = rssService.getRssFeed()
         call.enqueue(object : retrofit2.Callback<RssFeed> {
@@ -50,18 +55,28 @@ class MagicRssRepository(private val newsDao: NewsDao, private val rssService: R
         return newsList
     }
 
-    private suspend fun processNewsList(rssFeed: RssFeed?) : MutableList<News> {
-        var newsList = mutableListOf<News>()
+    private suspend fun processNewsList(rssFeed: RssFeed?) : NewsList {
+        val newsList = NewsList(ERROR, "RSS Feed is empty!")
         val rssItems = rssFeed?.channel?.item
         val baseLinkUrl = rssFeed?.channel?.link
-        rssItems?.let {
-            for(rssNews in it) {
-                val news = News(0, rssNews.title, baseLinkUrl + rssNews.link, rssNews.pubDateString, getImageUrl(rssNews.description))
-                newsList.add(news)
+        rssItems?.let { newsItems ->
+            for(index in 0 until MAX_NEWS_ITEMS) {
+                if (index < newsItems.size) {
+                    val rssNews = newsItems[index]
+                    val news = News(
+                        0,
+                        rssNews.title,
+                        baseLinkUrl + rssNews.link,
+                        rssNews.pubDateString,
+                        getImageUrl(rssNews.description)
+                    )
+                    newsList.add(news)
+                } else {
+                    break
+                }
             }
-            if (newsList.size > 20) {
-                newsList = newsList.subList(0, 20)
-            }
+            newsList.status = SUCCESS
+
             //add to database
             withContext(Dispatchers.IO) {
                 newsDao.deleteAll()
@@ -81,10 +96,16 @@ class MagicRssRepository(private val newsDao: NewsDao, private val rssService: R
         return imageUrl
     }
 
-    private suspend fun getNewsFromDB() : List<News> {
-        var newsList = listOf<News>()
+    private suspend fun getNewsFromDB() : NewsList {
+        val newsList = NewsList(ERROR, "Could not load RSS feed from database!")
         withContext(Dispatchers.IO) {
-            newsList = newsDao.getNews()
+            val list = newsDao.getNews()
+            if (list.isNotEmpty()) {
+                newsList.addAll(list)
+                newsList.status = SUCCESS
+            } else {
+                newsList.message = "RSS Feed is empty!"
+            }
         }
         return newsList
     }

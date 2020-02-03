@@ -7,27 +7,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wreckingball.magicdex.R
 import com.wreckingball.magicdex.models.Menu
-import com.wreckingball.magicdex.models.News
+import com.wreckingball.magicdex.models.NewsList
 import com.wreckingball.magicdex.repository.MagicRssRepository
 import org.koin.core.KoinComponent
 
-class HomeViewModel(val newsRepository: MagicRssRepository, application: Application) :
+class HomeViewModel(private val newsRepository: MagicRssRepository, application: Application) :
     AndroidViewModel(application), KoinComponent {
-    private var listMenu = MutableLiveData<List<Menu>>()
-    private var listNews = MutableLiveData<List<News>>()
+    private var menuList = MutableLiveData<List<Menu>>()
+    var newsList = MutableLiveData<NewsList>()
 
-    fun getListMenu(context: Context): LiveData<List<Menu>> {
-        listMenu.value = listOf(
+    init {
+        newsRepository.newsList = newsList
+    }
+
+    fun getMenuList(context: Context): LiveData<List<Menu>> {
+        menuList.value = listOf(
             Menu(1, context.resources.getString(R.string.menu_item_1), R.color.lightGreen),
             Menu(1, context.resources.getString(R.string.menu_item_2) , R.color.lightBlack),
             Menu(1, context.resources.getString(R.string.menu_item_3), R.color.lightRed),
             Menu(1, context.resources.getString(R.string.menu_item_4), R.color.lightBlue)
         )
-        return listMenu
+        return menuList
     }
 
-    fun getListNews(): LiveData<List<News>> {
-        listNews = newsRepository.getRssFeed()
-        return listNews
+    fun getNewsList() {
+        newsList.value = NewsList()
+        newsRepository.getRssFeed()
     }
 }
