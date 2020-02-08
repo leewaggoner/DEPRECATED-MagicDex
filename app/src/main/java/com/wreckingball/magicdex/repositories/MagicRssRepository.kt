@@ -1,4 +1,4 @@
-package com.wreckingball.magicdex.repository
+package com.wreckingball.magicdex.repositories
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

@@ -54,14 +54,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         model.newsList.observe(viewLifecycleOwner, Observer { newsList ->
             when (newsList.status) {
                 LOADING -> {
-                    progressBar.visibility = View.VISIBLE
+                    progressBarHome.visibility = View.VISIBLE
                 }
                 SUCCESS -> {
-                    progressBar.visibility = View.INVISIBLE
+                    progressBarHome.visibility = View.INVISIBLE
                     recyclerViewNews.adapter = NewsAdapter(newsList, view.context)
                 }
                 ERROR -> {
-                    progressBar.visibility = View.INVISIBLE
+                    progressBarHome.visibility = View.INVISIBLE
                     Snackbar.make(view, newsList.message, Snackbar.LENGTH_LONG).show()
                 }
             }

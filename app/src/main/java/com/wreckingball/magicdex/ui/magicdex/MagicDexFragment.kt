@@ -1,15 +1,51 @@
 package com.wreckingball.magicdex.ui.magicdex
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.wreckingball.magicdex.R
+import com.wreckingball.magicdex.adapters.CardPageAdapter
+import com.wreckingball.magicdex.models.Card
+import com.wreckingball.magicdex.network.ERROR
+import com.wreckingball.magicdex.network.LOADING
+import com.wreckingball.magicdex.network.SUCCESS
+import kotlinx.android.synthetic.main.fragment_magic_dex.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MagicDexFragment : Fragment() {
+class MagicDexFragment : Fragment(R.layout.fragment_magic_dex) {
+    private val model: MagicDexViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_magic_dex, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val layoutManager = GridLayoutManager(context, 2)
+        recyclerViewDex.layoutManager = layoutManager
+        recyclerViewDex.adapter = CardPageAdapter()
+
+        model.getPagedListBuilder().build().observe(viewLifecycleOwner, Observer<PagedList<Card>> { pagedList ->
+            val adapter = recyclerViewDex.adapter as CardPageAdapter
+            adapter.submitList(pagedList)
+        })
+
+        model.networkStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status.status) {
+                LOADING -> {
+                    progressBarDex.visibility = View.VISIBLE
+                }
+                SUCCESS -> {
+                    progressBarDex.visibility = View.INVISIBLE
+                }
+                ERROR -> {
+                    progressBarDex.visibility = View.INVISIBLE
+                    Snackbar.make(view, status.message, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("RETRY") {
+                            progressBarDex.visibility = View.VISIBLE
+                            status.retryable.retry()
+                        }.show()
+                }
+            }
+        })
     }
 }

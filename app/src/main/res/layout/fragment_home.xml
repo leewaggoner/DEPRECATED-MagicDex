@@ -179,7 +179,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarHome"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="94dp"
         android:layout_height="94dp"
