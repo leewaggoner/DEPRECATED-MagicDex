@@ -1,8 +1,12 @@
 package com.wreckingball.magicdex.models
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "cards")
 data class Card (
+    @PrimaryKey(autoGenerate = true) val cardId: Long,
     var name: String?,
     var names: List<String>?,
     var manaCost: String?,

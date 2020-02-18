@@ -7,6 +7,6 @@ import retrofit2.http.Query
 
 interface CardService {
     @GET("cards")
-    fun getCards(@Query("page") page: Long,
+    fun getCards(@Query("page") page: Int,
                  @Query("pageSize") pageSize: Int): Call<MagicCards>
 }

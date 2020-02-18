@@ -24,7 +24,7 @@ class MagicDexFragment : Fragment(R.layout.fragment_magic_dex) {
         recyclerViewDex.layoutManager = layoutManager
         recyclerViewDex.adapter = CardPageAdapter()
 
-        model.getPagedListBuilder().build().observe(viewLifecycleOwner, Observer<PagedList<Card>> { pagedList ->
+        model.cardList.observe(viewLifecycleOwner, Observer<PagedList<Card>> { pagedList ->
             val adapter = recyclerViewDex.adapter as CardPageAdapter
             adapter.submitList(pagedList)
         })

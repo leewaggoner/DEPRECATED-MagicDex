@@ -14,12 +14,16 @@ import retrofit2.Response
 private const val TAG = "MagicDataSource"
 const val CARD_PAGE_SIZE = 100
 
-class MagicDataSource(private val cardService: CardService) : PageKeyedDataSource<Long, Card>() {
-    lateinit var networkStatus: MutableLiveData<NetworkStatus>
-    private var lastPageNumber = 0L
+class MagicDataSource(private val cardService: CardService) : PageKeyedDataSource<Int, Card>() {
+    val networkStatus = MutableLiveData<NetworkStatus>()
+    private var lastPageNumber = 0
     private val status = NetworkStatus()
 
-    override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Long, Card>) {
+    init {
+        networkStatus.value = NetworkStatus()
+    }
+
+    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Card>) {
         Log.d(TAG, "Network call https://api.magicthegathering.io/v1/cards?page=1")
         val call = cardService.getCards(1, CARD_PAGE_SIZE)
         call.enqueue(object : retrofit2.Callback<MagicCards> {
@@ -32,7 +36,7 @@ class MagicDataSource(private val cardService: CardService) : PageKeyedDataSourc
                         cards?.let { fetchedCards ->
                             status.status = SUCCESS
                             networkStatus.value = status
-                            callback.onResult(fetchedCards.cards, null, 2L)
+                            callback.onResult(fetchedCards.cards, null, 2)
                             lastPageNumber = getLastPage(response.headers().get("link"))
                             Log.d(TAG, "lastPageNumber=$lastPageNumber")
                         }
@@ -64,10 +68,10 @@ class MagicDataSource(private val cardService: CardService) : PageKeyedDataSourc
         })
     }
 
-    override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, Card>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Card>) {
     }
 
-    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, Card>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Card>) {
         Log.d(TAG, "Network call https://api.magicthegathering.io/v1/cards?page=${params.key}")
 //        status.status = LOADING
 //        networkStatus.postValue(status)
@@ -113,8 +117,8 @@ class MagicDataSource(private val cardService: CardService) : PageKeyedDataSourc
         })
     }
 
-    private fun getLastPage(links: String?) : Long {
-        var lastPageNumber = 0L
+    private fun getLastPage(links: String?) : Int {
+        var lastPageNumber = 0
         val lastLink = getLastPageLink(links)
 
         if (lastLink != null) {
@@ -138,8 +142,8 @@ class MagicDataSource(private val cardService: CardService) : PageKeyedDataSourc
         return last
     }
 
-    private fun getLastPageNumber(last: String) : Long {
-        var lastPageNumber = 0L
+    private fun getLastPageNumber(last: String) : Int {
+        var lastPageNumber = 0
 
         val parts = last.split(";")
         if (parts.size == 2 && parts[0].isNotEmpty()) {
@@ -148,7 +152,7 @@ class MagicDataSource(private val cardService: CardService) : PageKeyedDataSourc
                 lastPage = lastPage.substringBeforeLast("&", "")
                 if (lastPage.isNotEmpty()) {
                     try {
-                        lastPageNumber = lastPage.toLong()
+                        lastPageNumber = lastPage.toInt()
                     } catch (ex: NumberFormatException) {
                         Log.e(TAG, ex.message, ex)
                     }
