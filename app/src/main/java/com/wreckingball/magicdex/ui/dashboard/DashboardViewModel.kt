@@ -60,10 +60,10 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun mapManaToResource(context: Context, mana: String) :Int {
-        return if (mana.length < 3) {
-            context.resources.getIdentifier("mana_$mana", "drawable", context.packageName)
-        } else {
-            R.drawable.mana_unexpected
+        var value = context.resources.getIdentifier("mana_$mana", "drawable", context.packageName)
+        if (value == 0) {
+            value = R.drawable.mana_unexpected
         }
+        return value
     }
 }
