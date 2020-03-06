@@ -10,6 +10,7 @@ import com.wreckingball.magicdex.network.*
 import com.wreckingball.magicdex.repositories.MagicBoundaryCallback
 import com.wreckingball.magicdex.repositories.MagicCardsRepository
 import com.wreckingball.magicdex.repositories.MagicRssRepository
+import com.wreckingball.magicdex.ui.dashboard.DashboardViewModel
 import com.wreckingball.magicdex.ui.home.HomeViewModel
 import com.wreckingball.magicdex.ui.magicdex.MagicDexViewModel
 import com.wreckingball.magicdex.utils.PreferencesWrapper
@@ -21,6 +22,7 @@ import org.koin.dsl.module
 val appModule = module(override = true) {
     viewModel { HomeViewModel(get()) }
     viewModel { MagicDexViewModel(get()) }
+    viewModel { DashboardViewModel() }
     single { MagicCardsRepository(get()) }
     single { MagicRssRepository(get(), get()) }
     single { MagicBoundaryCallback(get(), get()) }

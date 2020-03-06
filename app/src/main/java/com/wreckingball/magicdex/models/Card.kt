@@ -3,6 +3,7 @@ package com.wreckingball.magicdex.models
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "cards")
 data class Card (
@@ -37,7 +38,12 @@ data class Card (
     var originalType: String?,
     var legalities: List<Legalities>?,
     var id: String?
-) {
+) : Serializable {
+
+    companion object {
+        private const  val serialVersionUID = -55L
+    }
+
     object Diff {
         val DIFF_ITEMS = object : DiffUtil.ItemCallback<Card>() {
             override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {

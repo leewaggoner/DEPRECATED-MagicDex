@@ -19,9 +19,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    kotlinOptions {
+        //to get navArgs to compile from error:Cannot inline bytecode built with JVM target 1.8 into
+        // bytecode that is being built with JVM target 1.6. Please specify proper '-jvm-target' option
+        jvmTarget = "1.8"
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+//            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'MAGIC_NEWS_BASE_API', "\"https://magic.wizards.com/en/rss/\""
             buildConfigField 'String', 'MAGIC_CARD_BASE_API', "\"https://api.magicthegathering.io/v1/\""

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wreckingball.magicdex.R
 import com.wreckingball.magicdex.models.Menu
 import com.wreckingball.magicdex.ui.home.HomeFragmentDirections
-import com.wreckingball.magicdex.utils.ColorUtil
+import com.wreckingball.magicdex.utils.MagicUtil
 import kotlinx.android.synthetic.main.item_menu.view.*
 
 class MenuAdapter(
@@ -22,7 +22,7 @@ class MenuAdapter(
         fun bindView(item: Menu) {
             itemView.textViewName.text = item.name
 
-            val color = ColorUtil(itemView.context).convertColor(item.color)
+            val color = MagicUtil().convertColor(itemView.context, item.color)
             itemView.relativeLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
             itemView.setOnClickListener {

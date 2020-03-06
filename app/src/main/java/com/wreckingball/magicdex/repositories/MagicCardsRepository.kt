@@ -8,9 +8,6 @@ import androidx.paging.PagedList
 import com.wreckingball.magicdex.database.CardDao
 import com.wreckingball.magicdex.models.Card
 import com.wreckingball.magicdex.network.NetworkStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
