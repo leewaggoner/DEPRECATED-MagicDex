@@ -23,7 +23,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private lateinit var aboutFragment: AboutFragment
     private lateinit var artFragment: ArtFragment
     private lateinit var cardTextFragment: CardTextFragment
-    private lateinit var variationsFragment: VariationsFragment
+    private lateinit var miscellaneousFragment: MiscellaneousFragment
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,11 +33,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         aboutFragment = AboutFragment.newInstance()
         artFragment = ArtFragment.newInstance()
         cardTextFragment = CardTextFragment.newInstance()
-        variationsFragment = VariationsFragment.newInstance()
+        miscellaneousFragment = MiscellaneousFragment.newInstance()
         adapter.addFragment(aboutFragment, getString(R.string.tab_about))
         adapter.addFragment(artFragment, getString(R.string.tab_art))
         adapter.addFragment(cardTextFragment, getString(R.string.tab_card_text))
-        adapter.addFragment(variationsFragment, getString(R.string.tab_variations))
+        adapter.addFragment(miscellaneousFragment, getString(R.string.tab_miscellaneous))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

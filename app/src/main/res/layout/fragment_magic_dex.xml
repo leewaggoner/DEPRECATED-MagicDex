@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true">
-
     <ImageView
         android:layout_width="260dp"
         android:layout_height="260dp"
@@ -19,16 +18,14 @@
         android:adjustViewBounds="true"
         android:alpha="0.10"
         android:background="@drawable/magic_logo"
-        android:contentDescription="@string/content_description"
+        android:contentDescription="@string/blank"
         android:tint="@color/white" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="@android:color/transparent"
         android:fitsSystemWindows="false"
         app:elevation="0dp">
-
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,14 +33,12 @@
             app:collapsedTitleTextAppearance="@style/AppTheme.Title.Collapsed"
             app:expandedTitleTextAppearance="@style/AppTheme.Title.Expanded"
             app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
-
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom|end"
                 app:elevation="0dp"
                 app:layout_collapseMode="pin">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,13 +46,9 @@
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold" />
-
             </androidx.appcompat.widget.Toolbar>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDex"
         android:layout_width="match_parent"
@@ -71,7 +62,6 @@
         tools:itemCount="20"
         tools:listitem="@layout/item_card"
         tools:spanCount="2" />
-
 <!--    <com.leinardi.android.speeddial.SpeedDialView-->
 <!--        android:id="@+id/speedDial"-->
 <!--        android:layout_width="wrap_content"-->
@@ -79,8 +69,6 @@
 <!--        android:layout_gravity="bottom|end"-->
 <!--        app:sdMainFabOpenedSrc="@drawable/close"-->
 <!--        app:sdMainFabClosedSrc="@drawable/filter" />-->
-
-
     <ProgressBar
         android:layout_gravity="center"
         android:id="@+id/progressBarDex"
@@ -88,5 +76,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

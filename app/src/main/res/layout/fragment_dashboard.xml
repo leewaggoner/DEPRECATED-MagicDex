@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false">
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -14,8 +13,6 @@
         android:background="@color/lightWhite"
         android:elevation="0dp"
         android:fitsSystemWindows="false">
-
-
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
@@ -25,14 +22,12 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleEnabled="false"
             app:toolbarId="@+id/toolbar">
-
             <ImageView
                 android:id="@+id/cardImage"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/content_description"/>
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -44,13 +39,11 @@
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin">
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_margin="8dp"
                     android:padding="8dp">
-
                     <TextView
                         android:id="@+id/cardName"
                         android:layout_width="wrap_content"
@@ -63,7 +56,6 @@
                         android:textStyle="bold"
                         app:fontFamily="@font/circularstd_medium"
                         tools:text="Title" />
-
                     <TextView
                         android:id="@+id/cardId"
                         android:layout_width="wrap_content"
@@ -76,8 +68,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         tools:text="#001" />
-
-
                     <TextView
                         android:id="@+id/textViewType1"
                         android:layout_width="wrap_content"
@@ -91,7 +81,6 @@
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="Grass" />
-
                     <TextView
                         android:id="@+id/textViewType2"
                         android:layout_width="wrap_content"
@@ -105,7 +94,6 @@
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="Grass" />
-
                     <TextView
                         android:id="@+id/textViewType3"
                         android:layout_width="wrap_content"
@@ -118,19 +106,14 @@
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="Grass" />
-
                 </RelativeLayout>
-
             </androidx.appcompat.widget.Toolbar>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@drawable/rounded_top_border"
                 android:orientation="vertical">
-
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
@@ -140,47 +123,35 @@
                     app:tabSelectedTextColor="@color/red"
                     app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
                     app:tabTextColor="@color/black">
-
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tab_about" />
-
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tab_art" />
-
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tab_card_text" />
-
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/tab_variations" />
-
+                        android:text="@string/tab_miscellaneous" />
                 </com.google.android.material.tabs.TabLayout>
-
-
             </LinearLayout>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroundLight" />
     </androidx.core.widget.NestedScrollView>
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

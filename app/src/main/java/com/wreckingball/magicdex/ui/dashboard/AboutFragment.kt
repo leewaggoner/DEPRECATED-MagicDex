@@ -40,13 +40,13 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         } else {
             view.typesBlock.visibility = View.GONE
         }
-        if (!card.superTypes.isNullOrEmpty()) {
-            view.textSuperTypes.text = getStringFromList(card.superTypes)
+        if (!card.supertypes.isNullOrEmpty()) {
+            view.textSuperTypes.text = getStringFromList(card.supertypes)
         } else {
             view.superTypesBlock.visibility = View.GONE
         }
-        if (!card.subTypes.isNullOrEmpty()) {
-            view.textSubTypes.text = getStringFromList(card.subTypes)
+        if (!card.subtypes.isNullOrEmpty()) {
+            view.textSubTypes.text = getStringFromList(card.subtypes)
         } else {
             view.subTypesBlock.visibility = View.GONE
         }

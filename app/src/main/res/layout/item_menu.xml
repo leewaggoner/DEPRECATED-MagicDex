@@ -13,7 +13,6 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="8dp">
-
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
@@ -26,7 +25,6 @@
         android:textStyle="bold"
         app:fontFamily="@font/circularstd_medium"
         tools:text="@string/app_name" />
-
     <ImageView
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -37,7 +35,6 @@
         android:adjustViewBounds="true"
         android:alpha="0.25"
         android:src="@drawable/magic_logo"
-        android:contentDescription="@string/content_description"
+        android:contentDescription="@string/blank"
         android:tint="@color/white" />
-
 </RelativeLayout>

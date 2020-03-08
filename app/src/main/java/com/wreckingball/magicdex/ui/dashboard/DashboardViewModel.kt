@@ -4,8 +4,11 @@ import android.content.Context
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ImageSpan
+import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TableLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import com.wreckingball.magicdex.R
@@ -59,11 +62,42 @@ class DashboardViewModel : ViewModel() {
         return ssb
     }
 
-    fun mapManaToResource(context: Context, mana: String) :Int {
+    fun mapManaToResource(context: Context, mana: String) : Int {
         var value = context.resources.getIdentifier("mana_$mana", "drawable", context.packageName)
         if (value == 0) {
             value = R.drawable.mana_unexpected
         }
         return value
+    }
+
+    fun buildLayouts(context: Context, firstText: String, secondText: String) : LinearLayout {
+        //set up horizontal layout
+        val magicUtil = MagicUtil()
+        val layout = LinearLayout(context)
+        layout.orientation = LinearLayout.HORIZONTAL
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.topMargin = magicUtil.dpToPixels(context,8)
+        layout.layoutParams = layoutParams
+        layout.isFocusable = true
+
+        //set up first TextView
+        val dateText = TextView(context)
+        val dateParams = TableLayout.LayoutParams(0, TableLayout.LayoutParams.MATCH_PARENT, 2.0f)
+        dateText.layoutParams = dateParams
+        dateText.text = firstText
+        dateText.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.0f)
+
+
+        //set up second text box
+        val ruleText = TextView(context)
+        val ruleParams = TableLayout.LayoutParams(0, TableLayout.LayoutParams.MATCH_PARENT, 1.0f)
+        ruleText.layoutParams = ruleParams
+        ruleText.text = secondText
+        ruleText.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.0f)
+
+        layout.addView(dateText)
+        layout.addView(ruleText)
+
+        return layout
     }
 }

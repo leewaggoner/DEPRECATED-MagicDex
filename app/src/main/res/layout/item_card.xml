@@ -13,12 +13,10 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="8dp">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <TextView
             android:id="@+id/textViewCardName"
             android:layout_width="0dp"
@@ -30,7 +28,6 @@
             android:textStyle="bold"
             app:fontFamily="@font/circularstd_medium"
             tools:text="Title" />
-
         <TextView
             android:id="@+id/textViewId"
             android:layout_width="0dp"
@@ -41,9 +38,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="#001" />
-
     </LinearLayout>
-
     <TextView
         android:id="@+id/textViewType"
         android:layout_width="wrap_content"
@@ -57,7 +52,6 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         tools:text="Green" />
-
     <TextView
         android:id="@+id/textViewRarity"
         android:layout_width="wrap_content"
@@ -70,7 +64,6 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         tools:text="Black" />
-
     <ImageView
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -82,9 +75,8 @@
         android:alpha="0.25"
         android:src="@drawable/magic_logo"
         tools:src="@drawable/magic_logo"
-        android:contentDescription="@string/content_description"
+        android:contentDescription="@string/blank"
         android:tint="@color/white" />
-
     <ImageView
         android:id="@+id/imageViewCard"
         android:layout_width="60dp"
@@ -94,5 +86,4 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/content_description"
         tools:src="@drawable/card1" />
-
 </RelativeLayout>

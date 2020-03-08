@@ -10,7 +10,6 @@
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
-
     <TextView
         android:id="@+id/newsTitle"
         android:layout_width="wrap_content"
@@ -26,8 +25,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:fontFamily="@font/circularstd_medium" />
-
-
     <TextView
         android:id="@+id/newsDate"
         android:layout_width="wrap_content"
@@ -36,8 +33,6 @@
         android:layout_alignParentBottom="true"
         android:text="@string/news_date"
         android:textSize="14sp" />
-
-
     <ImageView
         android:id="@+id/newsImage"
         android:layout_width="wrap_content"
@@ -45,6 +40,4 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:adjustViewBounds="true" />
-
-
 </RelativeLayout>
