@@ -46,7 +46,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         view.tabs.setupWithViewPager(view.viewPager)
 
         val card = model.card
-        val color = MagicUtil().getCardColor(view.context, card.colorIdentity)
+        val color = MagicUtil.getCardColor(view.context, card.colorIdentity)
         view.app_bar.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP )
         view.toolbar_layout.contentScrim?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         cardName.text = card.name
@@ -73,7 +73,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
         }
 
-        val imageUrl = MagicUtil().makeHttps(card.imageUrl)
+        val imageUrl = MagicUtil.makeHttps(card.imageUrl)
         Glide.with(view.context)
             .load(imageUrl)
             .placeholder(android.R.color.transparent)

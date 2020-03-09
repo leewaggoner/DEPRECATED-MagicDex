@@ -23,7 +23,7 @@ class ArtFragment : Fragment(R.layout.fragment_art) {
 
         view.textArtist.text = "Artist: ${card.artist}"
 
-        val imageUrl = MagicUtil().makeHttps(card.imageUrl)
+        val imageUrl = MagicUtil.makeHttps(card.imageUrl)
         Glide.with(context!!)
             .load(imageUrl)
             .placeholder(android.R.color.transparent)

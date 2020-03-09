@@ -21,7 +21,7 @@ class CardPageAdapter : PagedListAdapter<Card, CardPageAdapter.ViewHolder>(Card.
             itemView.textViewCardName.text = item.name
             itemView.textViewId.text = item.number
 
-            val color = MagicUtil().getCardColor(itemView.context, item.colorIdentity)
+            val color = MagicUtil.getCardColor(itemView.context, item.colorIdentity)
             itemView.magicdexLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP )
 
             item.types?.elementAtOrNull(0).let {
@@ -33,7 +33,7 @@ class CardPageAdapter : PagedListAdapter<Card, CardPageAdapter.ViewHolder>(Card.
 
             itemView.textViewRarity.text = item.rarity
 
-            val imageUrl = MagicUtil().makeHttps(item.imageUrl)
+            val imageUrl = MagicUtil.makeHttps(item.imageUrl)
 
             Glide.with(itemView.context)
                 .load(imageUrl)

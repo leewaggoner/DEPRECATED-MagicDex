@@ -22,7 +22,7 @@ class MenuAdapter(
         fun bindView(item: Menu) {
             itemView.textViewName.text = item.name
 
-            val color = MagicUtil().convertColor(itemView.context, item.color)
+            val color = MagicUtil.convertColor(itemView.context, item.color)
             itemView.relativeLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
             itemView.setOnClickListener {
