@@ -32,9 +32,10 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun addImagesToText(context: Context, text: String?) : SpannableStringBuilder {
-        val ssb = SpannableStringBuilder(text)
+        val ssb = SpannableStringBuilder("")
         data class ImageMap(val start: Int, val end: Int, val imageId: Int)
         text?.let {
+            ssb.append(text)
             val imageMap: MutableList<ImageMap> = mutableListOf()
             val imageSize = MagicUtil().dpToPixels(context, 16)
             var start = it.indexOf("{")
@@ -70,7 +71,7 @@ class DashboardViewModel : ViewModel() {
         return value
     }
 
-    fun buildLayouts(context: Context, firstText: String, secondText: String) : LinearLayout {
+    fun buildLayouts(context: Context, firstText: String, secondText: String, addImages: Boolean) : LinearLayout {
         //set up horizontal layout
         val magicUtil = MagicUtil()
         val layout = LinearLayout(context)
@@ -81,22 +82,26 @@ class DashboardViewModel : ViewModel() {
         layout.isFocusable = true
 
         //set up first TextView
-        val dateText = TextView(context)
-        val dateParams = TableLayout.LayoutParams(0, TableLayout.LayoutParams.MATCH_PARENT, 2.0f)
-        dateText.layoutParams = dateParams
-        dateText.text = firstText
-        dateText.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.0f)
+        val textFirst = TextView(context)
+        val paramsFirst = TableLayout.LayoutParams(0, TableLayout.LayoutParams.MATCH_PARENT, 2.0f)
+        textFirst.layoutParams = paramsFirst
+        textFirst.text = firstText
+        textFirst.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.0f)
 
 
         //set up second text box
-        val ruleText = TextView(context)
-        val ruleParams = TableLayout.LayoutParams(0, TableLayout.LayoutParams.MATCH_PARENT, 1.0f)
-        ruleText.layoutParams = ruleParams
-        ruleText.text = secondText
-        ruleText.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.0f)
+        val textSecond = TextView(context)
+        val paramsSecond = TableLayout.LayoutParams(0, TableLayout.LayoutParams.MATCH_PARENT, 1.0f)
+        textSecond.layoutParams = paramsSecond
+        if (addImages) {
+            textSecond.text = addImagesToText(context, secondText)
+        } else {
+            textSecond.text = secondText
+        }
+        textSecond.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.0f)
 
-        layout.addView(dateText)
-        layout.addView(ruleText)
+        layout.addView(textFirst)
+        layout.addView(textSecond)
 
         return layout
     }

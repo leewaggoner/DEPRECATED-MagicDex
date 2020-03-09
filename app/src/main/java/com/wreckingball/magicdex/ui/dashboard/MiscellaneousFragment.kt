@@ -23,7 +23,7 @@ class MiscellaneousFragment : Fragment(R.layout.fragment_miscellaneous) {
         val rulings = card.rulings
         if (rulings != null && rulings.isNotEmpty()) {
             for (ruling in rulings) {
-                val layoutRuling = model.buildLayouts(context!!, ruling.date.toString(), ruling.text.toString())
+                val layoutRuling = model.buildLayouts(context!!, ruling.date.toString(), ruling.text.toString(), true)
                 rulingBlock.addView(layoutRuling)
             }
         } else {
@@ -33,7 +33,7 @@ class MiscellaneousFragment : Fragment(R.layout.fragment_miscellaneous) {
         val legalities = card.legalities
         if (legalities != null && legalities.isNotEmpty()) {
             for (legality in legalities) {
-                val layoutRuling = model.buildLayouts(context!!, legality.format.toString(), legality.legality.toString())
+                val layoutRuling = model.buildLayouts(context!!, legality.format.toString(), legality.legality.toString(), false)
                 legalityBlock.addView(layoutRuling)
             }
         } else {

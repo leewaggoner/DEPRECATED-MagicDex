@@ -1,5 +1,6 @@
 package com.wreckingball.magicdex.ui.magicdex
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -20,7 +21,12 @@ class MagicDexFragment : Fragment(R.layout.fragment_magic_dex) {
     private val model: MagicDexViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val layoutManager = GridLayoutManager(context, 2)
+        var spanCount = 1
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            spanCount = 2
+        }
+        val layoutManager = GridLayoutManager(context, spanCount)
+
         recyclerViewDex.layoutManager = layoutManager
         recyclerViewDex.adapter = CardPageAdapter()
 
