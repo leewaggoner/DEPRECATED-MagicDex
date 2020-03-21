@@ -18,12 +18,16 @@ class CardTextFragment : Fragment(R.layout.fragment_card_text) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val card = model.card
-        view.textCurrent.text = card.text
         if (!card.flavor.isNullOrEmpty()) {
             view.textFlavorHeader.visibility = View.VISIBLE
             view.textFlavor.visibility = View.VISIBLE
             view.textFlavor.text = card.flavor
         }
-        view.textOriginal.text = MagicUtil.addImagesToText(context!!, card.originalText)
+        view.textCurrent.text = MagicUtil.addImagesToText(context!!, card.text)
+        if (!card.originalText.isNullOrEmpty()) {
+            view.textOriginalHeader.visibility = View.VISIBLE
+            view.textOriginal.visibility = View.VISIBLE
+            view.textOriginal.text = MagicUtil.addImagesToText(context!!, card.originalText)
+        }
     }
 }

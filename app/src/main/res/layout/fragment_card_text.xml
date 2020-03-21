@@ -40,17 +40,20 @@
             android:layout_height="wrap_content"
             android:textSize="16sp" />
         <TextView
+            android:id="@+id/textOriginalHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/original_text"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
         <TextView
             android:id="@+id/textOriginal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
