@@ -17,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 const val CARD_PAGE_SIZE = 50
-private const val TAG = "MagicDataSource"
+private const val TAG = "MagicBoundaryCallback"
 private const val PAGE_NUMBER_KEY = "currentPageNumber"
 
 class MagicBoundaryCallback(private val cardDao: CardDao,

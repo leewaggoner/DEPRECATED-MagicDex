@@ -15,6 +15,11 @@
             app:destination="@id/magicDexFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_setsFragment"
+            app:destination="@id/setsFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/magicDexFragment"
@@ -36,4 +41,9 @@
             android:name="cardArg"
             app:argType="com.wreckingball.magicdex.models.Card" />
     </fragment>
+    <fragment
+        android:id="@+id/setsFragment"
+        android:name="com.wreckingball.magicdex.ui.sets.SetsFragment"
+        android:label="SetsFragment"
+        tools:layout="@layout/fragment_sets" />
 </navigation>

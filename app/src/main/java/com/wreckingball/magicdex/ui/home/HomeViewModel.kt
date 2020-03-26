@@ -17,12 +17,21 @@ class HomeViewModel(private val newsRepository: MagicRssRepository) : ViewModel(
         newsRepository.newsList = newsList
     }
 
+    companion object {
+        enum class MenuId {
+            MAGIC_DEX,
+            SETS,
+            TYPES,
+            FORMATS
+        }
+    }
+
     fun getMenuList(context: Context): LiveData<List<Menu>> {
         menuList.value = listOf(
-            Menu(1, context.resources.getString(R.string.menu_item_1), R.color.lightGreen),
-            Menu(1, context.resources.getString(R.string.menu_item_2) , R.color.lightBlack),
-            Menu(1, context.resources.getString(R.string.menu_item_3), R.color.lightRed),
-            Menu(1, context.resources.getString(R.string.menu_item_4), R.color.lightBlue)
+            Menu(MenuId.MAGIC_DEX, context.resources.getString(R.string.menu_item_1), R.color.lightGreen),
+            Menu(MenuId.SETS, context.resources.getString(R.string.menu_item_2) , R.color.lightBlack),
+            Menu(MenuId.TYPES, context.resources.getString(R.string.menu_item_3), R.color.lightRed),
+            Menu(MenuId.FORMATS, context.resources.getString(R.string.menu_item_4), R.color.lightBlue)
         )
         return menuList
     }

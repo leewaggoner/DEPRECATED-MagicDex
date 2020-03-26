@@ -10,9 +10,11 @@ import com.wreckingball.magicdex.network.*
 import com.wreckingball.magicdex.repositories.MagicBoundaryCallback
 import com.wreckingball.magicdex.repositories.MagicCardsRepository
 import com.wreckingball.magicdex.repositories.MagicRssRepository
+import com.wreckingball.magicdex.repositories.SetsRepository
 import com.wreckingball.magicdex.ui.dashboard.DashboardViewModel
 import com.wreckingball.magicdex.ui.home.HomeViewModel
 import com.wreckingball.magicdex.ui.magicdex.MagicDexViewModel
+import com.wreckingball.magicdex.ui.sets.SetsViewModel
 import com.wreckingball.magicdex.utils.PreferencesWrapper
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +25,8 @@ val appModule = module(override = true) {
     viewModel { HomeViewModel(get()) }
     viewModel { MagicDexViewModel(get()) }
     viewModel { DashboardViewModel() }
+    viewModel { SetsViewModel(get()) }
+    single { SetsRepository(get()) }
     single { MagicCardsRepository(get()) }
     single { MagicRssRepository(get(), get()) }
     single { MagicBoundaryCallback(get(), get()) }
@@ -34,6 +38,7 @@ val appModule = module(override = true) {
     single { MagicRSSApiService(get()) }
     single { RSSRetrofit() }
     single { provideCardService(get()) }
+    single { provideSetsService(get())}
     single { MagicCardApiService(get()) }
     single { CardRetrofit() }
     single { PreferencesWrapper(getSharedPrefs(androidContext())) }
@@ -45,6 +50,10 @@ fun provideRssService(magicRSSApiService: MagicRSSApiService) : RssService {
 
 fun provideCardService(magicCardApiService: MagicCardApiService) : CardService {
     return magicCardApiService.createService(CardService::class.java)
+}
+
+fun provideSetsService(magicCardApiService: MagicCardApiService) : SetsService {
+    return magicCardApiService.createService(SetsService::class.java)
 }
 
 private fun getSharedPrefs(context: Context) : SharedPreferences {

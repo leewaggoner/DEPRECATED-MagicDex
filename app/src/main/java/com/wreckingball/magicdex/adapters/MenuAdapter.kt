@@ -6,11 +6,13 @@ import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.wreckingball.magicdex.R
 import com.wreckingball.magicdex.models.Menu
 import com.wreckingball.magicdex.ui.home.HomeFragmentDirections
+import com.wreckingball.magicdex.ui.home.HomeViewModel.Companion.MenuId
 import com.wreckingball.magicdex.utils.MagicUtil
 import kotlinx.android.synthetic.main.item_menu.view.*
 
@@ -25,11 +27,22 @@ class MenuAdapter(
             val color = MagicUtil.convertColor(itemView.context, item.color)
             itemView.relativeLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
-            itemView.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToMagicDexFragment()
-                it.findNavController().navigate(action)
+            itemView.setOnClickListener {view ->
+                when (item.id) {
+                    MenuId.MAGIC_DEX ->
+                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToMagicDexFragment())
+                    MenuId.SETS ->
+                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToSetsFragment())
+                    MenuId.TYPES ->
+                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToMagicDexFragment())
+                    MenuId.FORMATS ->
+                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToMagicDexFragment())
+                }
             }
+        }
 
+        private fun gotoScreen(view: View, action: NavDirections) {
+            view.findNavController().navigate(action)
         }
     }
 

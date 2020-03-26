@@ -27,7 +27,8 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/content_description"/>
+                android:contentDescription="@string/content_description"
+                tools:src="@drawable/card1"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -55,7 +56,7 @@
                         android:textSize="28sp"
                         android:textStyle="bold"
                         app:fontFamily="@font/circularstd_medium"
-                        tools:text="Title" />
+                        tools:text="Card Title" />
                     <TextView
                         android:id="@+id/cardId"
                         android:layout_width="wrap_content"

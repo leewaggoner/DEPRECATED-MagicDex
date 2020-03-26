@@ -13,10 +13,8 @@
     <string name="news_date">January 8, 2020</string>
     <string name="menu_item_1">MagicDex</string>
     <string name="menu_item_2">Sets</string>
-    <string name="menu_item_3">Colors</string>
-    <string name="menu_item_4">Types</string>
-    <string name="menu_item_5">Items</string>
-    <string name="menu_item_6">Abilities</string>
+    <string name="menu_item_3">Types</string>
+    <string name="menu_item_4">Formats</string>
     <string name="tab_about">About</string>
     <string name="card_text">Card Text</string>
     <string name="mana_cost">Mana Cost</string>
@@ -40,6 +38,10 @@
     <string name="tab_miscellaneous">Misc</string>
     <string name="rulings">Rulings</string>
     <string name="legalities">Legalities</string>
+    <string name="setTitle">Magic Sets</string>
+    <string name="release_date">released %s</string>
+    <string name="set_type">%s set</string>
+    <string name="online_only">Online Only</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
