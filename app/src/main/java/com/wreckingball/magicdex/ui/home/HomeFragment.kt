@@ -1,6 +1,8 @@
 package com.wreckingball.magicdex.ui.home
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,5 +68,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         })
+
+        newsViewAll.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://magic.wizards.com/en/rss/rss.xml")))
+        }
     }
 }

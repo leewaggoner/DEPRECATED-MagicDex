@@ -25,8 +25,8 @@
     <string name="toughness">Toughness</string>
     <string name="types">Types</string>
     <string name="type">Type</string>
-    <string name="superTypes">Super Types</string>
-    <string name="subTypes">Sub Types</string>
+    <string name="superTypes">Supertypes</string>
+    <string name="subTypes">Subtypes</string>
     <string name="misc">Miscellaneous</string>
     <string name="rarity">Rarity</string>
     <string name="set">Set</string>
@@ -42,6 +42,10 @@
     <string name="release_date">released %s</string>
     <string name="set_type">%s set</string>
     <string name="online_only">Online Only</string>
+    <string name="cardTypes">Card Types</string>
+    <string name="cardSupertypes">Card Supertypes</string>
+    <string name="cardSubtypes">Card Subtypes</string>
+    <string name="moreInfo">More Info</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -34,7 +34,7 @@ class MenuAdapter(
                     MenuId.SETS ->
                         gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToSetsFragment())
                     MenuId.TYPES ->
-                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToMagicDexFragment())
+                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToTypesFragment())
                     MenuId.FORMATS ->
                         gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToMagicDexFragment())
                 }

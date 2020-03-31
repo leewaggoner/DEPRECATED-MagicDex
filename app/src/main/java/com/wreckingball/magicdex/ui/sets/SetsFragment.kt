@@ -11,7 +11,6 @@ import com.wreckingball.magicdex.adapters.SetAdapter
 import com.wreckingball.magicdex.network.ERROR
 import com.wreckingball.magicdex.network.LOADING
 import com.wreckingball.magicdex.network.SUCCESS
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_sets.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
