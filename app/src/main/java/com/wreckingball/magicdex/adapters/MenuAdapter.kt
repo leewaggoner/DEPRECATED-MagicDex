@@ -36,7 +36,7 @@ class MenuAdapter(
                     MenuId.TYPES ->
                         gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToTypesFragment())
                     MenuId.FORMATS ->
-                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToMagicDexFragment())
+                        gotoScreen(view, HomeFragmentDirections.actionHomeFragmentToFormatsFragment())
                 }
             }
         }

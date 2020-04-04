@@ -90,6 +90,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
                 app:layoutManager="GridLayoutManager"
+                app:spanCount="2"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_types"
@@ -123,6 +124,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
                 app:layoutManager="GridLayoutManager"
+                app:spanCount="2"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_types"
@@ -156,6 +158,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
                 app:layoutManager="GridLayoutManager"
+                app:spanCount="2"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_types"
@@ -164,7 +167,7 @@
     </androidx.core.widget.NestedScrollView>
     <ProgressBar
         android:layout_gravity="center"
-        android:id="@+id/progressBarSets"
+        android:id="@+id/progressBarTypes"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

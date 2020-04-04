@@ -9,6 +9,7 @@ import com.wreckingball.magicdex.database.NewsDatabase
 import com.wreckingball.magicdex.network.*
 import com.wreckingball.magicdex.repositories.*
 import com.wreckingball.magicdex.ui.dashboard.DashboardViewModel
+import com.wreckingball.magicdex.ui.formats.FormatsViewModel
 import com.wreckingball.magicdex.ui.home.HomeViewModel
 import com.wreckingball.magicdex.ui.magicdex.MagicDexViewModel
 import com.wreckingball.magicdex.ui.sets.SetsViewModel
@@ -25,6 +26,8 @@ val appModule = module(override = true) {
     viewModel { DashboardViewModel() }
     viewModel { SetsViewModel(get()) }
     viewModel { TypesViewModel(get()) }
+    viewModel { FormatsViewModel(get()) }
+    single { FormatsRepository(get()) }
     single { TypesRepository(get(), get(), get()) }
     single { SetsRepository(get()) }
     single { MagicCardsRepository(get()) }
@@ -38,6 +41,7 @@ val appModule = module(override = true) {
     single { MagicRSSApiService(get()) }
     single { RSSRetrofit() }
     single { provideCardService(get()) }
+    single { provideFormatsService(get()) }
     single { provideSupertypesService(get()) }
     single { provideTypesService(get()) }
     single { provideSubtypesService(get()) }
@@ -53,6 +57,10 @@ fun provideRssService(magicRSSApiService: MagicRSSApiService) : RssService {
 
 fun provideCardService(magicCardApiService: MagicCardApiService) : CardService {
     return magicCardApiService.createService(CardService::class.java)
+}
+
+fun provideFormatsService(magicCardApiService: MagicCardApiService) : FormatsService {
+    return magicCardApiService.createService(FormatsService::class.java)
 }
 
 fun provideSupertypesService(magicCardApiService: MagicCardApiService) : SupertypesService {

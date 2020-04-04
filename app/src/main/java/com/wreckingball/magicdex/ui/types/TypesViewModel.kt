@@ -20,15 +20,21 @@ class TypesViewModel(private val typesRepository: TypesRepository) : ViewModel()
     }
 
     fun getSupertypes() {
-        typesRepository.fetchSupertypes()
+        if (supertypes.value == null) {
+            typesRepository.fetchSupertypes()
+        }
     }
 
     fun getTypes() {
-        typesRepository.fetchTypes()
+        if (types.value == null) {
+            typesRepository.fetchTypes()
+        }
     }
 
     fun getSubtypes() {
-        typesRepository.fetchSubtypes()
+        if (subtypes.value == null) {
+            typesRepository.fetchSubtypes()
+        }
     }
 
     fun handleLinkClick(context: Context, linkType: LinkType) {

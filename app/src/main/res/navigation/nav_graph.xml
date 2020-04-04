@@ -25,6 +25,9 @@
             app:destination="@id/typesFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_formatsFragment"
+            app:destination="@id/formatsFragment" />
     </fragment>
     <fragment
         android:id="@+id/magicDexFragment"
@@ -56,4 +59,9 @@
         android:name="com.wreckingball.magicdex.ui.types.TypesFragment"
         android:label="fragment_types"
         tools:layout="@layout/fragment_types" />
+    <fragment
+        android:id="@+id/formatsFragment"
+        android:name="com.wreckingball.magicdex.ui.formats.FormatsFragment"
+        android:label="fragment_formats"
+        tools:layout="@layout/fragment_formats" />
 </navigation>

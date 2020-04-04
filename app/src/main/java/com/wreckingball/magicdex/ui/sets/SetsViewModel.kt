@@ -13,7 +13,9 @@ class SetsViewModel(private val setsRepository: SetsRepository) : ViewModel() {
     }
 
     fun getSets() {
-        sets.value = Sets()
-        setsRepository.getSets()
+        if (sets.value == null) {
+            sets.value = Sets()
+            setsRepository.getSets()
+        }
     }
 }
