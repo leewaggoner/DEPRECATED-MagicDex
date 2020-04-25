@@ -44,6 +44,7 @@ class HomeEspressoTest {
 
     @Before
     fun setup() {
+        //TODO: figure a way to get the link from the adapter item
 //        val url = getNewsItem0().link!!
     }
 

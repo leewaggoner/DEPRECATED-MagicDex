@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.wreckingball.magicdex.callbacks.CARD_PAGE_SIZE
+import com.wreckingball.magicdex.callbacks.MagicBoundaryCallback
 import com.wreckingball.magicdex.database.CardDao
 import com.wreckingball.magicdex.models.Card
 import com.wreckingball.magicdex.network.NetworkStatus

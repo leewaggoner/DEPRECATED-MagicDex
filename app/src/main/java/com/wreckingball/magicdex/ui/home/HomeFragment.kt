@@ -1,8 +1,6 @@
 package com.wreckingball.magicdex.ui.home
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +17,11 @@ import com.wreckingball.magicdex.adapters.NewsAdapter
 import com.wreckingball.magicdex.network.ERROR
 import com.wreckingball.magicdex.network.LOADING
 import com.wreckingball.magicdex.network.SUCCESS
+import com.wreckingball.magicdex.utils.MagicUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val model : HomeViewModel by viewModel()
@@ -41,7 +41,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val recyclerViewMenu = view.recyclerViewMenu
 
         recyclerViewMenu.layoutManager = GridLayoutManager(context, 2)
-        model.getMenuList(context!!).observe(viewLifecycleOwner, Observer { menuList ->
+        model.getMenuList(requireContext()).observe(viewLifecycleOwner, Observer { menuList ->
             recyclerViewMenu.adapter = MenuAdapter(menuList, view.context)
         })
 
@@ -70,7 +70,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
 
         newsViewAll.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://magic.wizards.com/en/rss/rss.xml")))
+            model.viewAllNews(requireActivity())
         }
+
+        imageViewSearch.setOnClickListener {
+            val searchText = editTextSearch.text.toString()
+            if (!searchText.isNullOrEmpty() && searchText.length > 1) {
+                model.searchByName(requireView(), searchText)
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MagicUtil.closeKeyboard(requireContext(), requireView())
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import androidx.room.Room
+import com.wreckingball.magicdex.callbacks.MagicBoundaryCallback
 import com.wreckingball.magicdex.database.CardDatabase
 import com.wreckingball.magicdex.database.NewsDatabase
 import com.wreckingball.magicdex.network.*
@@ -12,6 +13,7 @@ import com.wreckingball.magicdex.ui.dashboard.DashboardViewModel
 import com.wreckingball.magicdex.ui.formats.FormatsViewModel
 import com.wreckingball.magicdex.ui.home.HomeViewModel
 import com.wreckingball.magicdex.ui.magicdex.MagicDexViewModel
+import com.wreckingball.magicdex.ui.search.SearchViewModel
 import com.wreckingball.magicdex.ui.sets.SetsViewModel
 import com.wreckingball.magicdex.ui.types.TypesViewModel
 import com.wreckingball.magicdex.utils.PreferencesWrapper
@@ -27,12 +29,21 @@ val appModule = module(override = true) {
     viewModel { SetsViewModel(get()) }
     viewModel { TypesViewModel(get()) }
     viewModel { FormatsViewModel(get()) }
+    viewModel { SearchViewModel(get()) }
+    single { SearchRepository(get()) }
     single { FormatsRepository(get()) }
     single { TypesRepository(get(), get(), get()) }
     single { SetsRepository(get()) }
     single { MagicCardsRepository(get()) }
     single { MagicRssRepository(get(), get()) }
-    single { MagicBoundaryCallback(get(), get()) }
+    single { SearchDatasourceFactory(get()) }
+    single { SearchDataSource(get()) }
+    single {
+        MagicBoundaryCallback(
+            get(),
+            get()
+        )
+    }
     single { get<CardDatabase>().cardDao() }
     single { Room.databaseBuilder(androidApplication(), CardDatabase::class.java, "card_db").build() }
     single { get<NewsDatabase>().newsDao() }

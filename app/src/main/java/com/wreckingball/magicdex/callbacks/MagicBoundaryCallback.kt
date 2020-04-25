@@ -1,4 +1,4 @@
-package com.wreckingball.magicdex.repositories
+package com.wreckingball.magicdex.callbacks
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -41,7 +41,9 @@ class MagicBoundaryCallback(private val cardDao: CardDao,
         networkStatus.value = status
         var currentPageNumber = preferencesWrapper.getInt(PAGE_NUMBER_KEY, 1)
         Log.d(TAG, "Network call https://api.magicthegathering.io/v1/cards?page=$currentPageNumber")
-        val call = cardService.getCards(currentPageNumber, CARD_PAGE_SIZE)
+        val call = cardService.getCards(currentPageNumber,
+            CARD_PAGE_SIZE
+        )
         call.enqueue(object : retrofit2.Callback<MagicCards> {
             override fun onResponse(call: Call<MagicCards>, response: Response<MagicCards>) {
                 if (response.isSuccessful) {

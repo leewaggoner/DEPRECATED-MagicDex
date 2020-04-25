@@ -9,4 +9,9 @@ interface CardService {
     @GET("cards")
     fun getCards(@Query("page") page: Int,
                  @Query("pageSize") pageSize: Int): Call<MagicCards>
+
+    @GET("cards")
+    fun searchCards(@Query("name") name: String,
+                    @Query("page") page: Int,
+                    @Query("pageSize") pageSize: Int): Call<MagicCards>
 }

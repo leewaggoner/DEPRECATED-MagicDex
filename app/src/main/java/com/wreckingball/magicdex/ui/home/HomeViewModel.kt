@@ -1,9 +1,15 @@
 package com.wreckingball.magicdex.ui.home
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.wreckingball.magicdex.BuildConfig
 import com.wreckingball.magicdex.R
 import com.wreckingball.magicdex.models.Menu
 import com.wreckingball.magicdex.models.NewsList
@@ -39,5 +45,14 @@ class HomeViewModel(private val newsRepository: MagicRssRepository) : ViewModel(
     fun getNewsList() {
         newsList.value = NewsList()
         newsRepository.getRssFeed()
+    }
+
+    fun viewAllNews(activity: Activity) {
+        activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.MAGIC_NEWS_URL)))
+    }
+
+    fun searchByName(view: View, searchText: String) {
+        val action =  HomeFragmentDirections.actionHomeFragmentToSearchFragment(searchText)
+        view.findNavController().navigate(action)
     }
 }

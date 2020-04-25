@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ImageSpan
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -12,6 +14,11 @@ import com.wreckingball.magicdex.R
 import java.util.*
 
 object MagicUtil {
+    fun closeKeyboard(context: Context, view: View) {
+        val imm: InputMethodManager? = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
     fun getCardColor(context: Context, colorIdentity: List<String>?) : Int {
         val type = colorIdentity?.getOrNull(0)
         val color = when (type?.toUpperCase(Locale.US)) {
