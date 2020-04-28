@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -75,8 +76,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         imageViewSearch.setOnClickListener {
             val searchText = editTextSearch.text.toString()
-            if (!searchText.isNullOrEmpty() && searchText.length > 1) {
-                model.searchByName(requireView(), searchText)
+            model.searchByName(requireView(), searchText)
+        }
+
+        editTextSearch.setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    val searchText = editTextSearch.text.toString()
+                    model.searchByName(requireView(), searchText)
+                    true
+                } else -> false
             }
         }
     }

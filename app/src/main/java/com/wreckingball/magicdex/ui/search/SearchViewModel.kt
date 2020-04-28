@@ -1,13 +1,20 @@
 package com.wreckingball.magicdex.ui.search
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
+import com.wreckingball.magicdex.models.Card
 import com.wreckingball.magicdex.repositories.SearchRepository
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 
-class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
+class SearchViewModel(searchString: String) : ViewModel(), KoinComponent {
+    private val searchRepository: SearchRepository by inject { parametersOf(searchString) }
     val networkStatus = searchRepository.networkStatus
-    val cardList = searchRepository.cardList
+    val cardList: LiveData<PagedList<Card>>
 
-    fun searchByName(name: String) {
-        searchRepository.searchByName(name)
+    init {
+        cardList = searchRepository.cardList
     }
 }

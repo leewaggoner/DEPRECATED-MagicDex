@@ -52,7 +52,9 @@ class HomeViewModel(private val newsRepository: MagicRssRepository) : ViewModel(
     }
 
     fun searchByName(view: View, searchText: String) {
-        val action =  HomeFragmentDirections.actionHomeFragmentToSearchFragment(searchText)
-        view.findNavController().navigate(action)
+        if (searchText.isNotEmpty() && searchText.length > 1) {
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment(searchText)
+            view.findNavController().navigate(action)
+        }
     }
 }

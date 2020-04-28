@@ -29,15 +29,15 @@ val appModule = module(override = true) {
     viewModel { SetsViewModel(get()) }
     viewModel { TypesViewModel(get()) }
     viewModel { FormatsViewModel(get()) }
-    viewModel { SearchViewModel(get()) }
-    single { SearchRepository(get()) }
+    viewModel { (searchString: String) -> SearchViewModel(searchString) }
+    factory { (searchString: String) -> SearchRepository(searchString) }
     single { FormatsRepository(get()) }
     single { TypesRepository(get(), get(), get()) }
     single { SetsRepository(get()) }
     single { MagicCardsRepository(get()) }
     single { MagicRssRepository(get(), get()) }
-    single { SearchDatasourceFactory(get()) }
-    single { SearchDataSource(get()) }
+    factory { (searchString: String) ->  SearchDataSourceFactory(searchString) }
+    factory { (searchString: String) -> SearchDataSource(searchString, get()) }
     single {
         MagicBoundaryCallback(
             get(),

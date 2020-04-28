@@ -1,6 +1,6 @@
 package com.wreckingball.magicdex.ui.search
 
-import android.content.Context
+import android.app.AlertDialog
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -16,18 +16,14 @@ import com.wreckingball.magicdex.network.LOADING
 import com.wreckingball.magicdex.network.SUCCESS
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class SearchFragment : Fragment(R.layout.fragment_search) {
-    private val model: SearchViewModel by viewModel()
     private val args: SearchFragmentArgs by navArgs()
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        model.searchByName(args.searchText)
-    }
+    private val model: SearchViewModel by viewModel { parametersOf(args.searchText) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var spanCount = 1
@@ -39,9 +35,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         recyclerViewSearch.layoutManager = layoutManager
         recyclerViewSearch.adapter = CardPageAdapter()
 
-        model.cardList?.observe(viewLifecycleOwner, Observer { pagedList ->
-            val adapter = recyclerViewSearch.adapter as CardPageAdapter
-            adapter.submitList(pagedList)
+        model.cardList.observe(viewLifecycleOwner, Observer { pagedList ->
+            if (pagedList.isEmpty()) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.no_results_title)
+                    .setMessage(getString(R.string.no_results).format(args.searchText))
+                    .setPositiveButton(android.R.string.ok) { dialog, which ->
+                        requireActivity().onBackPressed()
+                    }
+                    .create()
+                    .show()
+            } else {
+                val adapter = recyclerViewSearch.adapter as CardPageAdapter
+                adapter.submitList(pagedList)
+            }
         })
 
         model.networkStatus.observe(viewLifecycleOwner, Observer { status ->
