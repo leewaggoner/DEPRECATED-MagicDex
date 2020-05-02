@@ -22,18 +22,16 @@ class MiscellaneousFragment : Fragment(R.layout.fragment_miscellaneous) {
 
         val rulings = model.card.rulings
         if (!rulings.isNullOrEmpty()) {
-            textRulings.visibility = View.VISIBLE
-            recyclerViewRulings.visibility = View.VISIBLE
+            rulingsBlock.visibility = View.VISIBLE
             recyclerViewRulings.layoutManager = LinearLayoutManager(context)
-            recyclerViewRulings.adapter = RulingsAdapter(rulings, view.context)
+            recyclerViewRulings.adapter = RulingsAdapter(rulings)
         }
 
         val legalities = model.card.legalities
         if(!legalities.isNullOrEmpty()) {
-            textLegalities.visibility = View.VISIBLE
-            recyclerViewLegalities.visibility = View.VISIBLE
+            legalitiesBlock.visibility = View.VISIBLE
             recyclerViewLegalities.layoutManager = LinearLayoutManager(context)
-            recyclerViewLegalities.adapter = LegalitiesAdapter(legalities, view.context)
+            recyclerViewLegalities.adapter = LegalitiesAdapter(legalities)
         }
     }
 }

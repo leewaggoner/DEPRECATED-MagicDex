@@ -47,32 +47,32 @@ class TypesFragment : Fragment(R.layout.fragment_types) {
 
         model.supertypes.observe(viewLifecycleOwner, Observer { supertypes ->
             if (!supertypes.supertypes.isNullOrEmpty()) {
-                recyclerViewSupertypes.adapter = TypeAdapter(supertypes.supertypes, view.context)
+                recyclerViewSupertypes.adapter = TypeAdapter(supertypes.supertypes)
             }
         })
 
         model.types.observe(viewLifecycleOwner, Observer { types ->
             if (!types.types.isNullOrEmpty()) {
-                recyclerViewTypes.adapter = TypeAdapter(types.types, view.context)
+                recyclerViewTypes.adapter = TypeAdapter(types.types)
             }
         })
 
         model.subtypes.observe(viewLifecycleOwner, Observer { subtypes ->
             if (!subtypes.subtypes.isNullOrEmpty()) {
-                recyclerViewSubtypes.adapter = TypeAdapter(subtypes.subtypes, view.context)
+                recyclerViewSubtypes.adapter = TypeAdapter(subtypes.subtypes)
             }
         })
 
         supertypeMoreInfo.setOnClickListener {
-            model.handleLinkClick(context!!, TypesViewModel.LinkType.SUPERTYPE)
+            model.handleLinkClick(requireContext(), TypesViewModel.LinkType.SUPERTYPE)
         }
 
         typeMoreInfo.setOnClickListener {
-            model.handleLinkClick(context!!, TypesViewModel.LinkType.TYPE)
+            model.handleLinkClick(requireContext(), TypesViewModel.LinkType.TYPE)
         }
 
         subtypeMoreInfo.setOnClickListener {
-            model.handleLinkClick(context!!, TypesViewModel.LinkType.SUBTYPE)
+            model.handleLinkClick(requireContext(), TypesViewModel.LinkType.SUBTYPE)
         }
     }
 }

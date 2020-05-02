@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.wreckingball.magicdex.R
+import com.wreckingball.magicdex.databinding.ItemCardBinding
 import com.wreckingball.magicdex.models.Card
 import com.wreckingball.magicdex.ui.magicdex.MagicDexFragmentDirections
 import com.wreckingball.magicdex.ui.search.SearchFragmentDirections
@@ -17,11 +16,8 @@ import com.wreckingball.magicdex.utils.MagicUtil
 import kotlinx.android.synthetic.main.item_card.view.*
 
 class CardPageAdapter : PagedListAdapter<Card, CardPageAdapter.ViewHolder>(Card.Diff.DIFF_ITEMS) {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(private val binding: ItemCardBinding, itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: Card) {
-            itemView.textViewCardName.text = item.name
-            itemView.textViewId.text = item.number
-
             val color = MagicUtil.getCardColor(itemView.context, item.colorIdentity)
             itemView.magicdexLayoutBackground.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP )
 
@@ -32,14 +28,8 @@ class CardPageAdapter : PagedListAdapter<Card, CardPageAdapter.ViewHolder>(Card.
                 }
             }
 
-            itemView.textViewRarity.text = item.rarity
-
-            val imageUrl = MagicUtil.makeHttps(item.imageUrl)
-
-            Glide.with(itemView.context)
-                .load(imageUrl)
-                .placeholder(android.R.color.transparent)
-                .into(itemView.imageViewCard)
+            binding.card = item
+            binding.executePendingBindings()
 
             itemView.setOnClickListener {
                 try {
@@ -54,8 +44,9 @@ class CardPageAdapter : PagedListAdapter<Card, CardPageAdapter.ViewHolder>(Card.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_card, parent, false)
-        return ViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val cardBinding = ItemCardBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(cardBinding, cardBinding.root)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

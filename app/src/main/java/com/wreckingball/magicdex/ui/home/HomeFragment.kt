@@ -61,7 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
                 SUCCESS -> {
                     progressBarHome.visibility = View.INVISIBLE
-                    recyclerViewNews.adapter = NewsAdapter(newsList, view.context)
+                    recyclerViewNews.adapter = NewsAdapter(newsList)
                 }
                 ERROR -> {
                     progressBarHome.visibility = View.INVISIBLE
@@ -79,7 +79,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             model.searchByName(requireView(), searchText)
         }
 
-        editTextSearch.setOnEditorActionListener { v, actionId, event ->
+        editTextSearch.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     val searchText = editTextSearch.text.toString()

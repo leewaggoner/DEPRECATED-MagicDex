@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayoutBackground"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_margin="8dp"
-    android:background="@drawable/background_item_magic"
-    android:clipToPadding="false"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="8dp">
-    <TextView
-        android:id="@+id/textViewType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/circularstd_medium"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/circularstd_medium"
-        tools:text="Artifact" />
-</LinearLayout>
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="type"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/relativeLayoutBackground"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_item_magic"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/textViewType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/circularstd_medium"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@{type}"
+            app:fontFamily="@font/circularstd_medium"
+            tools:text="Artifact" />
+    </LinearLayout>
+</layout>

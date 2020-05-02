@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/rulingDate"
-        android:layout_width="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ruling"
+            type="com.wreckingball.magicdex.models.Rulings" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp" />
-    <TextView
-        android:id="@+id/rulingText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:textSize="16sp" />
-</LinearLayout>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/rulingDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{ruling.date}"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/rulingText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            app:textWithImages="@{ruling.text}" />
+    </LinearLayout>
+</layout>

@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backgroundLight"
-    android:fillViewport="true"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp">
-    <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="card"
+            type="com.wreckingball.magicdex.models.Card" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/textArtist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textSize="16sp"
-            tools:text="Artist: Joe Blow"/>
-        <ImageView
-            android:id="@+id/imageArt"
+        android:background="@color/backgroundLight"
+        android:fillViewport="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/content_description"
-            tools:src="@drawable/card1"
-            />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="16sp"
+                android:text="@{@string/artist_name(card.artist)}"
+                tools:text="Artist: Joe Blow"/>
+            <ImageView
+                android:id="@+id/imageArt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/content_description"
+                app:imageUrl="@{card.imageUrl}"
+                tools:src="@drawable/card1"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

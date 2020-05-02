@@ -1,89 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/magicdexLayoutBackground"
-    android:layout_width="match_parent"
-    android:layout_height="128dp"
-    android:layout_margin="8dp"
-    android:background="@drawable/background_item_magic"
-    android:clickable="true"
-    android:clipToPadding="false"
-    android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:padding="8dp">
-    <LinearLayout
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="card"
+            type="com.wreckingball.magicdex.models.Card" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/magicdexLayoutBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/textViewCardName"
-            android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_item_magic"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.65"
-            android:fontFamily="@font/circularstd_medium"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textViewCardName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/circularstd_medium"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@{card.name}"
+                app:fontFamily="@font/circularstd_medium"
+                tools:text="Title" />
+            <TextView
+                android:id="@+id/textViewId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.35"
+                android:alpha="0.50"
+                android:gravity="end"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@{card.number}"
+                tools:text="#001" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textViewType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textViewRarity"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_item_magic_span"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/circularstd_medium"
-            tools:text="Title" />
+            android:textSize="14sp"
+            tools:text="Green" />
         <TextView
-            android:id="@+id/textViewId"
-            android:layout_width="0dp"
+            android:id="@+id/textViewRarity"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.35"
-            android:alpha="0.50"
-            android:gravity="end"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:text="#001" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/textViewType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewRarity"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/background_item_magic_span"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        tools:text="Green" />
-    <TextView
-        android:id="@+id/textViewRarity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/background_item_magic_span"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        tools:text="Black" />
-    <ImageView
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-16dp"
-        android:layout_marginBottom="-24dp"
-        android:adjustViewBounds="true"
-        android:alpha="0.25"
-        android:src="@drawable/magic_logo"
-        tools:src="@drawable/magic_logo"
-        android:contentDescription="@string/blank"
-        android:tint="@color/white" />
-    <ImageView
-        android:id="@+id/imageViewCard"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/content_description"
-        tools:src="@drawable/card1" />
-</RelativeLayout>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/background_item_magic_span"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="@{card.rarity}"
+            tools:text="Black" />
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="-16dp"
+            android:layout_marginBottom="-24dp"
+            android:adjustViewBounds="true"
+            android:alpha="0.25"
+            android:src="@drawable/magic_logo"
+            tools:src="@drawable/magic_logo"
+            android:contentDescription="@string/blank"
+            android:tint="@color/white" />
+        <ImageView
+            android:id="@+id/imageViewCard"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/content_description"
+            app:imageUrl="@{card.imageUrl}"
+            tools:src="@drawable/card1" />
+    </RelativeLayout>
+</layout>

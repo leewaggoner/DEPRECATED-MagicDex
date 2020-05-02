@@ -35,7 +35,7 @@ class FormatsFragment : Fragment(R.layout.fragment_formats) {
                 }
                 SUCCESS -> {
                     progressBarFormats.visibility = View.INVISIBLE
-                    recyclerViewFormats.adapter = FormatsAdapter(formats.formats, view.context)
+                    recyclerViewFormats.adapter = FormatsAdapter(formats.formats)
                 }
                 ERROR -> {
                     progressBarFormats.visibility = View.INVISIBLE
@@ -45,7 +45,7 @@ class FormatsFragment : Fragment(R.layout.fragment_formats) {
         })
 
         formatsMoreInfo.setOnClickListener {
-            model.handleFormatsClick(context!!)
+            model.handleFormatsClick(requireContext())
         }
     }
 }

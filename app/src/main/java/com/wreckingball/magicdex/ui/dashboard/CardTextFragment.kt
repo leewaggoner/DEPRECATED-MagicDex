@@ -1,33 +1,25 @@
 package com.wreckingball.magicdex.ui.dashboard
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.wreckingball.magicdex.R
-import com.wreckingball.magicdex.utils.MagicUtil
-import kotlinx.android.synthetic.main.fragment_card_text.view.*
+import com.wreckingball.magicdex.databinding.FragmentCardTextBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class CardTextFragment : Fragment(R.layout.fragment_card_text) {
+class CardTextFragment : Fragment() {
     val model: DashboardViewModel by sharedViewModel()
 
     companion object {
         fun newInstance() = CardTextFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val card = model.card
-        if (!card.flavor.isNullOrEmpty()) {
-            view.textFlavorHeader.visibility = View.VISIBLE
-            view.textFlavor.visibility = View.VISIBLE
-            view.textFlavor.text = card.flavor
-        }
-        view.textCurrent.text = MagicUtil.addImagesToText(context!!, card.text)
-        if (!card.originalText.isNullOrEmpty()) {
-            view.textOriginalHeader.visibility = View.VISIBLE
-            view.textOriginal.visibility = View.VISIBLE
-            view.textOriginal.text = MagicUtil.addImagesToText(context!!, card.originalText)
-        }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = DataBindingUtil.inflate<FragmentCardTextBinding>(inflater, R.layout.fragment_card_text, container, false)
+        binding.card = model.card
+        return binding.root
     }
 }

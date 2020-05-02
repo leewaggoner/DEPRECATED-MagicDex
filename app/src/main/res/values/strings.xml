@@ -31,6 +31,7 @@
     <string name="rarity">Rarity</string>
     <string name="set">Set</string>
     <string name="tab_art">Art</string>
+    <string name="artist_name">"Artist: %s</string>
     <string name="tab_card_text">Card Text</string>
     <string name="current_text">Current Text</string>
     <string name="flavor_text">Flavor Text</string>

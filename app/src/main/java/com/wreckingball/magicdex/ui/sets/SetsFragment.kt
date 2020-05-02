@@ -32,7 +32,7 @@ class SetsFragment : Fragment(R.layout.fragment_sets) {
                 }
                 SUCCESS -> {
                     progressBarSets.visibility = View.INVISIBLE
-                    recyclerViewSets.adapter = SetAdapter(sets.sets, view.context)
+                    recyclerViewSets.adapter = SetAdapter(sets.sets)
                 }
                 ERROR -> {
                     progressBarSets.visibility = View.INVISIBLE

@@ -40,7 +40,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 AlertDialog.Builder(requireContext())
                     .setTitle(R.string.no_results_title)
                     .setMessage(getString(R.string.no_results).format(args.searchText))
-                    .setPositiveButton(android.R.string.ok) { dialog, which ->
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
                         requireActivity().onBackPressed()
                     }
                     .create()
